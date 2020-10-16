@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { CharProps } from "../components/Char/Char";
 
 export type Mistyped = Record<number, boolean>;
 
-const getCurrentlyMistyped = (letters: JSX.Element[]): Mistyped =>
+const getCurrentlyMistyped = (letters: CharProps[]): Mistyped =>
   letters.reduce(
     (acc, letter, i) => ({
       ...acc,
-      ...(letter.props.status === "Incorrect" && { [i]: true }),
+      ...(letter.status === "Incorrect" && { [i]: true }),
     }),
     {} as Mistyped
   );
 
-export default (letters: JSX.Element[]) => {
+export default (letters: CharProps[]) => {
   const { keys } = Object;
   const [mistyped, setMistyped] = useState<Mistyped>({});
 

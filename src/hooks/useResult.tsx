@@ -1,30 +1,28 @@
-import React from "react";
-import Char, { CharStatus } from "../components/Char/Char";
+import { CharProps, CharStatus } from "../components/Char/Char";
 
-// type Char = string;
+type Letter = string;
 type Typed = string;
 type Untyped = string;
+type ZippedChars = [Letter, Typed | Untyped];
 
-type CharInput = [string, Typed | Untyped];
-
-interface TypedStatus {
-  letters: JSX.Element[];
+interface ResultStatus {
+  letters: CharProps[];
   cursorAt: number;
 }
 
 const UNTYPED = "@";
 
-const charStatus = ([char, typed]: CharInput): CharStatus => {
+const charStatus = ([char, typed]: ZippedChars): CharStatus => {
   if (typed === UNTYPED) {
     return "Untyped";
   }
   return char === typed ? "Correct" : "Incorrect";
 };
 
-export default (input: string, typed: string): TypedStatus => {
+export default (input: string, typed: string): ResultStatus => {
   const typedChars = typed.split("");
 
-  const zipped: CharInput[] = input
+  const zipped: ZippedChars[] = input
     .split("")
     .map((char, i) => [char, typedChars[i] || UNTYPED]);
 
@@ -39,18 +37,17 @@ export default (input: string, typed: string): TypedStatus => {
       return {
         letters: [
           ...letters,
-          <Char
-            key={`key${i}`}
-            char={char}
-            typedChar={typed === UNTYPED ? "" : typed}
-            showCursor={cursorPosition === i}
-            status={status}
-          />,
+          {
+            char,
+            status,
+            typedChar: typed === UNTYPED ? "" : typed,
+            showCursor: cursorPosition === i,
+          },
         ],
         cursorAt: cursorPosition,
       };
     },
-    { letters: [] as JSX.Element[], cursorAt: -1 } as TypedStatus
+    { letters: [] as CharProps[], cursorAt: -1 } as ResultStatus
   );
 
   return result;

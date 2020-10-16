@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
+import { CharProps } from "../components/Char/Char";
 
-const wordAsString = (word: JSX.Element[]) =>
-  word.map(char => char.props.char).join("");
+const wordAsString = (word: CharProps[]) =>
+  word.map(char => char.char).join("");
 
-const isValidWord = (word: JSX.Element[]) =>
+const isValidWord = (word: CharProps[]) =>
   word.length > 0 && !["\n"].includes(wordAsString(word));
 
-const isCompletedWord = (word: JSX.Element[]) =>
-  word.every(char => ["Correct", "Incorrect"].includes(char.props.status));
+const isCompletedWord = (word: CharProps[]) =>
+  word.every(char => ["Correct", "Incorrect"].includes(char.status));
 
-const getCompletedWordCount = (words: JSX.Element[][]) =>
+const getCompletedWordCount = (words: CharProps[][]) =>
   words.filter(word => isValidWord(word)).filter(word => isCompletedWord(word))
     .length;
 
-export default (words: JSX.Element[][], startTime: Date | undefined) => {
+export default (words: CharProps[][], startTime: Date | undefined) => {
   const completedWordCount = getCompletedWordCount(words);
   const [statsForWordCount, setStatsForWordCount] = useState(0);
   const [wordsPerMinute, setWordsPerMinute] = useState<number>(0);

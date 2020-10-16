@@ -1,8 +1,10 @@
-export default (letters: JSX.Element[]) => {
+import { CharProps } from "../components/Char/Char";
+
+export default (letters: CharProps[]) => {
   const details = letters.reduce(
     (acc, letter) => {
-      const correct = letter.props.status === "Correct" ? 1 : 0;
-      const incorrect = letter.props.status === "Incorrect" ? 1 : 0;
+      const correct = letter.status === "Correct" ? 1 : 0;
+      const incorrect = letter.status === "Incorrect" ? 1 : 0;
       return {
         correct: acc.correct + correct,
         incorrect: acc.incorrect + incorrect,

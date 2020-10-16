@@ -4,7 +4,7 @@ import styles from "./Char.module.scss";
 
 export type CharStatus = "Correct" | "Incorrect" | "Untyped";
 
-interface Props {
+export interface CharProps {
   char: string;
   status: CharStatus;
   showCursor: boolean;
@@ -38,7 +38,7 @@ export default ({
   wasCorrected,
   showCursor,
   status,
-}: Props) => {
+}: CharProps) => {
   return (
     <div
       className={classnames(

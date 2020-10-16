@@ -8,12 +8,12 @@ const pushAToken = <T>({ tokens, current }: Tokeniser<T>): Tokeniser<T> => ({
   tokens: [...tokens, current],
 });
 
-export type TokeniserPredicate = (element: any) => boolean;
+export type TokeniserPredicate<T> = (element: T) => boolean;
 
 export default <T>(
   elements: T[],
-  nextTokenInclusive: TokeniserPredicate,
-  nextTokenExclusive: TokeniserPredicate
+  nextTokenInclusive: TokeniserPredicate<T>,
+  nextTokenExclusive: TokeniserPredicate<T>
 ): T[][] => {
   const tokeniser = elements.reduce(
     (acc, letter) => {

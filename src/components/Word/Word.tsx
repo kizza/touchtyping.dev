@@ -1,14 +1,15 @@
 import classnames from "classnames";
 import React from "react";
 import styles from "./Word.module.scss";
+import Char, { CharProps } from "../Char/Char";
 
-interface Props {
-  children: JSX.Element[];
+export interface WordProps {
+  letters: CharProps[];
 }
 
-const specialCaseClass = (children: JSX.Element[]) => {
-  if (children && children.length === 1) {
-    switch (children[0].props.char) {
+const specialCaseClass = (letters: CharProps[]) => {
+  if (letters && letters.length === 1) {
+    switch (letters[0].char) {
       case "\n":
         return styles.EnterToken;
       default:
@@ -17,10 +18,12 @@ const specialCaseClass = (children: JSX.Element[]) => {
   }
 };
 
-export default ({ children }: Props) => {
+export default ({ letters }: WordProps) => {
   return (
-    <div className={classnames(styles.Word, specialCaseClass(children))}>
-      {children}
+    <div className={classnames(styles.Word, specialCaseClass(letters))}>
+      {letters.map((char, i) => (
+        <Char {...char} key={`char${i}`} />
+      ))}
     </div>
   );
 };
