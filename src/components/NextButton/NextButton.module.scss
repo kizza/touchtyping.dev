@@ -1,0 +1,15 @@
+.NextButton {
+  margin: 1em 0;
+  opacity: 1;
+  transition: opacity 1s;
+  border: solid 1px #ccc;
+  font-family: inherit;
+  font-size: 1.4em;
+  padding: 0.5em 1.6em;
+  text-align: left;
+
+  &.Enabled {
+    opacity: 1;
+    font-weight: bold;
+  }
+}

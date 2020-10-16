@@ -1,0 +1,79 @@
+.Challenge {
+  top: 40%;
+  left: 50%;
+  position: absolute;
+  margin: 0 2em;
+
+  .Inner {
+    display: block;
+    float: left;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    text-align: left;
+
+    .Code {
+      text-align: left;
+      border: solid 1px #ccc;
+      float: left;
+      font-size: 1.2em;
+      width: 80vw;
+      padding: 1em;
+    }
+
+    .Completed {
+      border-color: green;
+      background: #e7fbd3;
+    }
+
+    .SolarizedLight {
+      // background: #fdf6e3;
+    }
+  }
+
+  h1 {
+  }
+
+  .Stats {
+    float: right;
+    margin-top: 1em;
+
+    span + span {
+      margin-left: 1em;
+    }
+  }
+
+  .NextButton {
+    margin: 1em 0;
+    opacity: 1;
+    transition: opacity 1s;
+    border: solid 1px #ccc;
+    font-family: inherit;
+    font-size: 1.4em;
+    padding: 0.5em 1.6em;
+    text-align: left;
+
+    &.Enabled {
+      opacity: 1;
+      font-weight: bold;
+    }
+  }
+}
+
+.Line {
+  padding-left: 2em;
+}
+
+.Dotnet {
+  .Line:first-child,
+  .Line:nth-child(2),
+  .Line:last-child {
+    padding-left: 0;
+  }
+}
+
+.Node {
+  .Line:first-child,
+  .Line:last-child {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,50 @@
+.Char {
+  margin-right: 1px;
+  display: inline-block;
+  position: relative;
+  transition: color 0.6s;
+
+  border-bottom: solid 2px transparent;
+  &.WithCursor {
+    border-color: blue;
+  }
+
+  &.EnterKey {
+    background-image: url(../../assets/enter.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+  }
+}
+
+.Correct {
+  color: #0e630e;
+  background: #e7fbd3;
+  &.WasCorrected {
+    background: #ffe9b2;
+  }
+}
+
+.Incorrect {
+  color: darkred;
+  background: pink;
+}
+
+.Untyped {
+  color: grey;
+}
+
+.IncorrectFeedback {
+  position: absolute;
+  color: white;
+  visibility: hidden;
+  opacity: 1;
+  left: 0;
+  top: 0;
+
+  &.FadeOut {
+    transition: opacity 2s;
+    opacity: 0;
+    visibility: visible;
+  }
+}

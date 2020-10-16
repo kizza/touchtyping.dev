@@ -1,0 +1,8 @@
+.Line {
+  float: left;
+  clear: left;
+}
+
+.Line + .Line {
+  margin-top: 0.4em;
+}

@@ -1,0 +1,8 @@
+.Word {
+  display: inline-block;
+  float: left;
+}
+
+.EnterToken + .Word {
+  clear: left;
+}
