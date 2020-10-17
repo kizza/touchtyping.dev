@@ -6,6 +6,7 @@ import useKeyboard from "./hooks/useKeyboard";
 import useMistypedKeys from "./hooks/useMistypedKeys";
 import useResult from "./hooks/useResult";
 import useTimer from "./hooks/useTimer";
+import useSoundEffects from "./hooks/useSoundEffects";
 
 function App() {
   const [text, setText] = useState<string>(buildRandomFunction());
@@ -13,6 +14,8 @@ function App() {
   const { startTime, clearStartTime } = useTimer(typed);
   const { letters } = useResult(text, typed);
   const { mistyped, clearMistyped } = useMistypedKeys(letters);
+
+  useSoundEffects(typed.length);
 
   const onCompleted = () => {
     clearTyped();
