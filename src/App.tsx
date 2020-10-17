@@ -1,37 +1,53 @@
-import React, { useState } from "react";
-import "./App.css";
-import Challenge from "./components/Challenge/Challenge";
-import { buildRandomFunction } from "./generators";
-import useKeyboard from "./hooks/useKeyboard";
-import useMistypedKeys from "./hooks/useMistypedKeys";
-import useResult from "./hooks/useResult";
-import useTimer from "./hooks/useTimer";
-import useSoundEffects from "./hooks/useSoundEffects";
+import classnames from "classnames";
+import "animate.css/animate.min.css";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import styles from "./App.module.scss";
+import Header from "./components/Header/Header";
+import Mask from "./components/Mask/Mask";
+import Nav from "./components/Nav/Nav";
+import { useToggleState } from "./hooks/useToggleState";
+import routes from "./routes";
 
 function App() {
-  const [text, setText] = useState<string>(buildRandomFunction());
-  const [typed, clearTyped] = useKeyboard(text.length);
-  const { startTime, clearStartTime } = useTimer(typed);
-  const { letters } = useResult(text, typed);
-  const { mistyped, clearMistyped } = useMistypedKeys(letters);
+  const [menuState, setMenuState] = useToggleState();
 
-  useSoundEffects(typed.length);
+  const menuClosing = menuState === "closing";
+  const showMask = menuState === "open";
 
-  const onCompleted = () => {
-    clearTyped();
-    clearMistyped();
-    clearStartTime();
-    setText(buildRandomFunction());
+  const openMenu = () => setMenuState("open");
+  const closeMenu = () => menuState === "open" && setMenuState("closing");
+  const closeMask = () => {
+    closeMenu();
   };
 
+  const bodyClasses = classnames(styles.Page, {
+    [styles.Blurred]: showMask,
+    [styles.Offset]: menuState === "open",
+    [styles.Closing]: menuState === "closing",
+  });
+
   return (
-    <div className="App">
-      <Challenge
-        letters={letters}
-        mistyped={mistyped}
-        startTime={startTime}
-        onCompleted={onCompleted}
-      />
+    <div className={styles.App}>
+      <Router>
+        <div className={bodyClasses}>
+          <Header openMenu={openMenu} />
+          <div
+            className={classnames(styles.Content, showMask && styles.Blurred)}
+          >
+            <div className={styles.Inner}>{routes}</div>
+          </div>
+          {/* <Footer /> */}
+        </div>
+
+        <Nav
+          open={menuState === "open"}
+          closing={menuClosing}
+          closeMenu={closeMenu}
+        />
+      </Router>
+
+      <Mask showing={showMask} closing={menuClosing} onClose={closeMask} />
     </div>
   );
 }

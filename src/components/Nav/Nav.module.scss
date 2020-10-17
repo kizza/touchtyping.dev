@@ -1,0 +1,41 @@
+.Nav {
+  list-style-type: none;
+  --animate-duration: 0.3s;
+  margin: 0;
+  padding: 1.2em;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  text-align: left;
+  background: white;
+  display: none;
+
+  li {
+    display: block;
+
+    a {
+      padding: 1em;
+      display: block;
+      text-decoration: none;
+      color: black;
+
+      &.active {
+        background: #e4ecec;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.Open {
+  display: block;
+}
+.Closing {
+  display: block;
+}

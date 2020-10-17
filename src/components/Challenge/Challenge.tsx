@@ -49,17 +49,18 @@ export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
   return (
     <div className={classnames(styles.Challenge, styles[format])}>
       <div className={styles.Inner}>
-        <h1>Ninja Typer</h1>
-        <div
-          className={classnames(
-            styles.Code,
-            styles.SolarizedLight,
-            allTyped && styles.Completed
-          )}
-        >
-          {structure.map((words, i) => (
-            <Line words={words} key={`line${i}`} className={styles.Line} />
-          ))}
+        <div className={styles.Border}>
+          <div
+            className={classnames(
+              styles.Code,
+              styles.SolarizedLight,
+              allTyped && styles.Completed
+            )}
+          >
+            {structure.map((words, i) => (
+              <Line words={words} key={`line${i}`} className={styles.Line} />
+            ))}
+          </div>
         </div>
 
         <NextButton allTyped={allTyped} onCompleted={onCompleted} />

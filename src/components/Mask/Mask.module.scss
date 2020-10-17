@@ -1,0 +1,38 @@
+.Modal {
+  // background: rgba(255, 255, 255, 0.5);
+  // background: #afda4d61;
+  // background: #80008040;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+
+  height: 1px;
+  overflow: hidden;
+  display: block;
+
+  div {
+    transition: opacity 0.5s ease-out;
+    background: #000;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+}
+
+.Showing {
+  height: 100%;
+  div {
+    opacity: 0.2;
+  }
+}
+
+.Closing {
+  height: 100%;
+  div {
+    opacity: 0;
+  }
+}

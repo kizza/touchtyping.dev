@@ -1,8 +1,5 @@
 .Challenge {
-  top: 40%;
-  left: 50%;
-  position: absolute;
-  margin: 0 2em;
+  text-align: center;
 
   .Inner {
     display: block;
@@ -11,13 +8,21 @@
     transform: translate(-50%, -50%);
     text-align: left;
 
-    .Code {
-      text-align: left;
+    .Border {
       border: solid 1px #ccc;
+      width: 100%;
       float: left;
       font-size: 1.2em;
       width: 80vw;
       padding: 1em;
+
+      .Code {
+        text-align: left;
+        float: left;
+        font-size: 1.2em;
+        width: 100%;
+        padding: 1em;
+      }
     }
 
     .Completed {
