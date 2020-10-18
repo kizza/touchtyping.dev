@@ -1,0 +1,10 @@
+name: touchtyping-dev
+
+component: website
+inputs:
+  src:
+    src: ./src
+    hook: npm run build
+    dist: ./build
+  bucketName: touchtyping-dev
+  domain: touchtyping.dev

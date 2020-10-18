@@ -23,6 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "yarn build",
+    "deploy": "serverless",
+    "destroy": "serverless remove",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,6 +47,7 @@
     "@types/classnames": "^2.2.10",
     "@types/faker": "^5.1.2",
     "@types/react-router-dom": "^5.1.6",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "serverless": "^2.8.0"
   }
 }
