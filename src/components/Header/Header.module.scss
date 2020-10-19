@@ -16,14 +16,21 @@
   font-size: 1.8em;
   position: absolute;
   z-index: 100;
-  top: 0.5em;
+  top: 0.4em;
   left: 0.5em;
   padding: 0.5em;
   width: 1.2em;
   height: 1.2em;
   border-radius: 50%;
-  // background: $orange;
+  background: transparent;
+  border: none;
   text-decoration: none;
+  color: red;
+  cursor: pointer;
+
+  svg {
+    margin-top: 0.1em;
+  }
 
   &:hover {
     color: blue;
