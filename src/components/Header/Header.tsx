@@ -1,7 +1,6 @@
 import classnames from "classnames";
 import React from "react";
 import styles from "./Header.module.scss";
-import github from "../../assets/github.png";
 
 interface Props {
   openMenu: () => void;
@@ -19,13 +18,6 @@ export default ({ darkMode, openMenu }: Props) => (
           <rect y="60" width="100" height="10"></rect>
         </svg>
       </button>
-      <a
-        href="https://github.com/kizza/touchtyping.dev"
-        className={styles.GithubLink}
-      >
-        <span>View on github</span>
-        <img src={github} alt="View on github" />
-      </a>
     </div>
   </div>
 );

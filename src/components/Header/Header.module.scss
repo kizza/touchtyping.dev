@@ -51,7 +51,6 @@
     top: 1.3em;
     right: 1em;
     padding: 1em;
-    opacity: 0.5;
     transition: opacity 0.5s;
 
     span {
@@ -59,8 +58,12 @@
       position: absolute; top: -9999px;
     }
 
+    svg {
+      color: var(--text);
+    }
+
     &:hover {
-      opacity: 1;
+      color: (--primary);
     }
   }
 }

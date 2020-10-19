@@ -1,0 +1,35 @@
+@import "../../shared";
+
+.Footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: solid 1px var(--text);
+
+  a {
+    padding: 1em;
+    display: block;
+    text-decoration: none;
+    color: var(--light-text);
+
+    span {
+      position: absolute;
+      font-size: 1px;
+      text-indent: -999px;
+    }
+
+    svg {
+      padding-right: 0.4em;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--primary);
+
+      svg {
+        fill: var(--primary);
+      }
+    }
+  }
+}

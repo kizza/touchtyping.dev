@@ -6,8 +6,9 @@
   position: relative;
   color: var(--text);
 
-  --primary: blue;
-  --text: #07585a;
+  --primary: red;
+  --text: $primary;
+  --light-text: #999;
 
   --syntax-const: #b07305;
   --syntax-variable: purple;
@@ -24,6 +25,7 @@
   &.DarkMode {
     --primary: #e959ba;
     --text: #adb9b9;
+    --light-text: #ccc;
 
     --correct-fg: #fafffa;
     --correct-bg: #2f442f;

@@ -8,6 +8,7 @@ import Nav from "./components/Nav/Nav";
 import { useInterface } from "./hooks/useInterface";
 import { SettingsContext, useInitialSettings } from "./hooks/useSettings";
 import routes from "./routes";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const {
@@ -38,6 +39,7 @@ function App() {
             <div className={contentClassNames}>
               <div className={styles.Inner}>{routes}</div>
             </div>
+            <Footer />
           </div>
 
           <Nav
