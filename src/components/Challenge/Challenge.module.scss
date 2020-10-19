@@ -2,32 +2,32 @@
   text-align: center;
 
   .Inner {
+    max-width: 1400px;
     display: block;
-    float: left;
     margin: 0 auto;
-    transform: translate(-50%, -50%);
     text-align: left;
+    max-width: 1600px;
 
     .Border {
       border: solid 1px #ccc;
-      width: 100%;
+      border-radius: 2px;
+      margin-bottom: 1em;
       float: left;
-      font-size: 1.2em;
-      width: 80vw;
       padding: 1em;
+      width: 100%;
+      box-sizing: border-box;
 
       .Code {
         text-align: left;
         float: left;
         font-size: 1.2em;
         width: 100%;
-        padding: 1em;
       }
     }
 
     .Completed {
       border-color: green;
-      background: #e7fbd3;
+      background: var(--correct-bg)
     }
 
     .SolarizedLight {
@@ -60,6 +60,12 @@
     &.Enabled {
       opacity: 1;
       font-weight: bold;
+    }
+  }
+
+  &.DarkMode {
+    .Border {
+      border-color: #444;
     }
   }
 }

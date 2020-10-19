@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
 import useAccuracy from "../../hooks/useAccuracy";
 import { Mistyped } from "../../hooks/useMistypedKeys";
 import useTokens from "../../hooks/useTokens";
@@ -10,6 +10,7 @@ import NextButton from "../NextButton/NextButton";
 import Stats from "../Stats/Stats";
 import { WordProps } from "../Word/Word";
 import styles from "./Challenge.module.scss";
+import { SettingsContext } from "../../hooks/useSettings";
 
 interface Props {
   letters: CharProps[];
@@ -29,6 +30,8 @@ const discernFormat = (lines: CharProps[][][]) => {
 export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
   const accuracy = useAccuracy(letters);
 
+  const { darkMode } = useContext(SettingsContext);
+
   const { words, lines } = useTokens(letters, mistyped);
 
   const { wordsPerMinute, completedWordCount, seconds } = useWordsPerMinute(
@@ -47,16 +50,18 @@ export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
   );
 
   return (
-    <div className={classnames(styles.Challenge, styles[format])}>
+    <div
+      className={classnames(
+        styles.Challenge,
+        styles[format],
+        darkMode && styles.DarkMode
+      )}
+    >
       <div className={styles.Inner}>
-        <div className={styles.Border}>
-          <div
-            className={classnames(
-              styles.Code,
-              styles.SolarizedLight,
-              allTyped && styles.Completed
-            )}
-          >
+        <div
+          className={classnames(styles.Border, allTyped && styles.Completed)}
+        >
+          <div className={classnames(styles.Code, styles.SolarizedLight)}>
             {structure.map((words, i) => (
               <Line words={words} key={`line${i}`} className={styles.Line} />
             ))}

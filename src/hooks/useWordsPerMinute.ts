@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { CharProps } from "../components/Char/Char";
-
-const wordAsString = (word: CharProps[]) =>
-  word.map(char => char.char).join("");
+import { wordAsString } from "../components/Word/Word";
 
 const isValidWord = (word: CharProps[]) =>
   word.length > 0 && !["\n"].includes(wordAsString(word));

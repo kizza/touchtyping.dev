@@ -7,9 +7,15 @@
   font-size: 1.4em;
   padding: 0.5em 1.6em;
   text-align: left;
+  color: inherit;
 
   &.Enabled {
     opacity: 1;
     font-weight: bold;
+  }
+
+  &.DarkMode {
+    background: #111;
+    border-color: #000;
   }
 }

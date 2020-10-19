@@ -1,27 +1,31 @@
+import classnames from "classnames";
 import React from "react";
 import styles from "./Header.module.scss";
+import github from "../../assets/github.png";
 
 interface Props {
   openMenu: () => void;
+  darkMode: boolean;
 }
 
-export default ({ openMenu }: Props) => (
+export default ({ darkMode, openMenu }: Props) => (
   <div className={styles.Overlay}>
-<<<<<<< HEAD
-    <div className={styles.Header}>
-      <h1>Ninja Typer</h1>
-      <a className={styles.Hamburger} href="#menu" onMouseDown={openMenu}>
-=======
     <div className={classnames(styles.Header, darkMode && styles.DarkMode)}>
       <h1>touchtyping.dev</h1>
       <button className={styles.Hamburger} onMouseDown={openMenu}>
->>>>>>> 74e046b... Use button for hamburger
         <svg viewBox="0 0 100 80" width="30" height="30">
           <rect width="100" height="10"></rect>
           <rect y="30" width="100" height="10"></rect>
           <rect y="60" width="100" height="10"></rect>
         </svg>
       </button>
+      <a
+        href="https://github.com/kizza/touchtyping.dev"
+        className={styles.GithubLink}
+      >
+        <span>View on github</span>
+        <img src={github} alt="View on github" />
+      </a>
     </div>
   </div>
 );

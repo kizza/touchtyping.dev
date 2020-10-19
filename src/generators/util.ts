@@ -12,3 +12,6 @@ export const pascalize = (input: string) =>
       (_g0, g1, g2) => `${g1.toUpperCase()}${g2.toLowerCase()}`
     )
     .replace(/ /g, "");
+
+export const oneOf = (options: any[]) =>
+  options[Math.floor(Math.random() * options.length)];

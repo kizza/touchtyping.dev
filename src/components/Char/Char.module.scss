@@ -2,35 +2,43 @@
   margin-right: 1px;
   display: inline-block;
   position: relative;
-  transition: color 0.6s;
+  // transition: color 0.6s;
 
   border-bottom: solid 2px transparent;
   &.WithCursor {
-    border-color: blue;
+    border-color: var(--primary);
   }
 
   &.EnterKey {
     background-image: url(../../assets/enter.png);
     background-repeat: no-repeat;
     background-position: center;
+    // opacity: 0.5;
   }
 }
 
 .Correct {
-  color: #0e630e;
-  background: #e7fbd3;
+  color: var(--correct-fg);
+  background: var(--correct-bg);
   &.WasCorrected {
-    background: #ffe9b2;
+    background: var(--corrected-bg);
   }
+
+  &.Bracket {
+  }
+
+  // &.EnterKey {
+  //   opacity: 1;
+  // }
 }
 
 .Incorrect {
-  color: darkred;
-  background: pink;
+  color: var(--incorrect-fg);
+  background: var(--incorrect-bg);
 }
 
 .Untyped {
-  color: grey;
+  color: var(--untyped-fg);
 }
 
 .IncorrectFeedback {

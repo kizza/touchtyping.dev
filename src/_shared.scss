@@ -1,0 +1,60 @@
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+$radius: 0.4em;
+
+// Colours
+$text: #07585a;
+$primary: #99971b;
+$primary: #005fcc;
+$highlight: pink;
+$grass: #afda4d;
+
+$dark-bg: #282828;
+
+// Palette
+$purple: purple;
+$orange: #fa8234;
+$green: #0a898d;
+$aqua: #0a898d;
+$light-green: #ddeeba;
+
+%no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// %text-content {
+//   padding: 0 1em;
+//   font-size: 80%;
+// }
+
+// %link-button {
+//   background: transparent;
+//   font-family: inherit;
+//   font-size: inherit;
+//   text-align: left;
+//   outline: none;
+//   cursor: pointer;
+//   border: none;
+// }
+
+// Fonts
+
+// $font: "Luckiest Guy";
+$font: "Noto Serif", "Balsamiq Sans", cursive;
+$font: "Balsamiq Sans", cursive;
+
+// $boldfont: "Noto Serif", "Balsamiq Sans", cursive;
+$boldfont: "Balsamiq Sans", cursive;
+$header-font: "Noto Serif", "Balsamiq Sans", cursive;
+
+// A raised button
+%button {
+  transition: box-shadow 0.2s ease-out, background 0.8s ease-out;
+  box-shadow: #999 0.1em 0.3em 0.4em;
+
+  &:hover {
+    box-shadow: #999 0.1em 0.1em 0.1em;
+  }
+}

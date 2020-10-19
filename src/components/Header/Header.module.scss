@@ -1,8 +1,14 @@
+@import "../../shared";
+
 .Header {
   width: 100%;
   position: relative;
   display: block;
   float: left;
+
+  h1 {
+    margin: 1em 0;
+  }
 
   .Overlay {
     position: absolute;
@@ -10,33 +16,51 @@
     width: 100%;
     margin: 0 auto;
   }
-}
 
-.Hamburger {
-  font-size: 1.8em;
-  position: absolute;
-  z-index: 100;
-  top: 0.4em;
-  left: 0.5em;
-  padding: 0.5em;
-  width: 1.2em;
-  height: 1.2em;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  text-decoration: none;
-  color: red;
-  cursor: pointer;
+  .Hamburger {
+    font-size: 1.8em;
+    position: absolute;
+    z-index: 10;
+    top: 0.6em;
+    left: 0.3em;
+    padding: 0.8em;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    @extend %no-tap-highlight;
+    outline: none;
 
-  svg {
-    margin-top: 0.1em;
+    svg {
+      margin: auto;
+      fill: var(--text);
+    }
+
+    &:hover {
+      svg {
+        fill: var(--primary);
+      }
+    }
   }
 
-  &:hover {
-    color: blue;
-  }
+  .GithubLink {
+    position: absolute;
+    top: 1.3em;
+    right: 1em;
+    padding: 1em;
+    opacity: 0.5;
+    transition: opacity 0.5s;
 
-  svg {
-    margin-top: 0.1em;
+    span {
+      font-size: 1px; text-indent: 9999px;
+      position: absolute; top: -9999px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }

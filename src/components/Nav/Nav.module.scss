@@ -9,27 +9,39 @@
   top: 0;
   bottom: 0;
   width: 30%;
+  min-width: 20em;
   text-align: left;
   background: white;
   display: none;
 
-  li {
-    display: block;
+  ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
 
-    a {
-      padding: 1em;
+    li {
       display: block;
-      text-decoration: none;
-      color: black;
 
-      &.active {
-        background: #e4ecec;
-      }
+      a {
+        padding: 1em;
+        display: block;
+        text-decoration: none;
+        color: black;
 
-      &:hover {
-        text-decoration: underline;
+        &.active {
+          background: #e4ecec;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
+  }
+
+  &.DarkMode {
+    background: #111;
   }
 }
 

@@ -1,22 +1,22 @@
-import { buildBasicFunction as buildBasicTypescriptFunction } from "./typescript";
-import { buildBasicFunction as buildBasicJavascriptFunction } from "./javascript";
-import { buildBasicFunction as buildBasicCSharpFunction } from "./csharp";
 import faker from "faker";
+import { buildBasicFunction as buildBasicCSharpFunction } from "./csharp";
+import { buildBasicFunction as buildBasicJavascriptFunction } from "./javascript";
+import {
+  buildBasicFunction as buildBasicTypescriptFunction,
+  buildBasicFunction2 as buildBasicTypescriptFunction2,
+} from "./typescript";
+import { oneOf } from "./util";
 
-const buildRandomPhrase = () =>
-  faker.fake(
-    // "{{hacker.verb}} {{hacker.noun}}\n{{hacker.verb}} {{hacker.noun}}\n"
-    "{{hacker.phrase}}\n"
-  );
+const buildRandomPhrase = () => faker.fake("{{hacker.phrase}}\n");
 
 export const buildRandomFunction = () => {
   const builders = [
     buildRandomPhrase,
     buildBasicTypescriptFunction,
+    buildBasicTypescriptFunction2,
     buildBasicJavascriptFunction,
     buildBasicCSharpFunction,
   ];
 
-  const builder = builders[Math.floor(Math.random() * builders.length)];
-  return builder();
+  return oneOf(builders)();
 };

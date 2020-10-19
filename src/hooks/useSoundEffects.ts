@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import keypress from "../assets/typewriter.mp3";
+import { SettingsContext } from "./useSettings";
 
-export const playKeypress = () => new Audio(keypress).play();
+export const playTheKeypress = () => new Audio(keypress).play();
 
 export default (typedLength: number) => {
   const [cachedTypedLength, setCachedTypedLength] = useState(0);
 
-  if (typedLength !== cachedTypedLength) {
-    playKeypress();
+  const { playKeypress } = useContext(SettingsContext);
+
+  if (playKeypress && typedLength !== cachedTypedLength) {
+    playTheKeypress();
     setCachedTypedLength(typedLength);
   }
 };

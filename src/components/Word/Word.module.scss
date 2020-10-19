@@ -6,3 +6,11 @@
 .EnterToken + .Word {
   clear: left;
 }
+
+.Const {
+  color: var(--syntax-const);
+}
+
+.Variable {
+  color: var(--syntax-variable);
+}

@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import { Syntax } from "../Word/Word";
 import styles from "./Char.module.scss";
 
 export type CharStatus = "Correct" | "Incorrect" | "Untyped";
@@ -10,12 +11,20 @@ export interface CharProps {
   showCursor: boolean;
   wasCorrected?: boolean;
   typedChar?: string;
+  syntax?: Syntax;
 }
 
 const specialCharClassName = (char: string) => {
   switch (char) {
     case "\n":
       return styles.EnterKey;
+    case "(":
+    case ")":
+    case "[":
+    case "]":
+    case "{":
+    case "}":
+      return styles.Bracket;
     default:
       return undefined;
   }

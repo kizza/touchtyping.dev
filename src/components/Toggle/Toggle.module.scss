@@ -1,0 +1,130 @@
+@import "../../shared";
+
+// From https://css-tricks.com/emoji-toggles/
+
+// Base class
+.EmojiToggle {
+  position: relative;
+  width: 60px;
+  // margin: 40px auto;
+  margin: 40px 2em;
+
+  .Well {
+    display: block;
+    background: #eee;
+    transition: background 0.2s ease-out;
+    height: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    &:before,
+    &:after {
+      padding: 0.4em;
+      margin-top: -0.4em;
+    }
+    &:before {
+      padding-left: 2em;
+    }
+    &:after {
+      padding-right: 2em;
+    }
+    // &:before {
+    //   font-weight: bold;
+    // }
+    // &:after {
+    //   font-weight: normal;
+    // }
+  }
+
+  .Toggle {
+    opacity: 0;
+    border: 0;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+
+    ~.Emoji:before {
+      content: "\01F431";
+      position: absolute;
+      left: 0;
+      top: -15px;
+      font-size: 40px;
+      transition: 0.2s;
+    }
+
+    &:checked {
+      ~.Emoji:before {
+        left: 100%;
+        margin-left: -0.8em;
+      }
+      ~.Well {
+        background: $primary;
+      }
+      // ~.Well:before {
+      //   font-weight: normal;
+      // }
+      // ~.Well:after {
+      //   font-weight: bold;
+      // }
+    }
+
+    ~label {
+      white-space: nowrap;
+      &:before {
+        // position: absolute;
+        // right: 100%;
+        // margin-right: 5px;
+        // top: 0;
+      }
+      &:after {
+        position: absolute;
+        left: 100%;
+        margin-left: 10px;
+        top: 0;
+      }
+    }
+  }
+}
+
+@mixin emojiType($leftEmoji, $rightEmoji, $leftLabel, $rightLabel) {
+  .Toggle {
+    ~.Emoji:before {
+      content: $leftEmoji;
+    }
+    &:checked {
+      ~.Emoji:before {
+        content: $rightEmoji;
+      }
+    }
+     ~label {
+      &:before {
+        // content: $leftLabel;
+        content: "";
+      }
+      &:after {
+        content: $rightLabel;
+      }
+    }
+  }
+}
+
+.EmojiHappy {
+  @include emojiType(
+    "\01F604", "\01F620", "Happy", "Mad"
+  );
+}
+
+.EmojiSound {
+  @include emojiType(
+    "\01F508", "\01F50A", "Muted", "Keypress Sound"
+  )
+};
+
+.EmojiTheme {
+  @include emojiType(
+    "😎", "😈", "Light", "Dark Mode"
+  )
+};
