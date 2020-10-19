@@ -1,3 +1,5 @@
+@import "../../shared";
+
 .Challenge {
   text-align: center;
 
@@ -9,9 +11,7 @@
     max-width: 1600px;
 
     .Border {
-      border: solid 1px #ccc;
-      border-radius: 2px;
-      margin-bottom: 1em;
+      border: solid 1px var(--button);
       float: left;
       padding: 1em;
       width: 100%;
@@ -26,7 +26,7 @@
     }
 
     .Completed {
-      border-color: green;
+      border-color: var(--success);
       background: var(--correct-bg)
     }
 
@@ -51,7 +51,7 @@
     margin: 1em 0;
     opacity: 1;
     transition: opacity 1s;
-    border: solid 1px #ccc;
+    border: solid 1px var(--button);
     font-family: inherit;
     font-size: 1.4em;
     padding: 0.5em 1.6em;
@@ -60,12 +60,6 @@
     &.Enabled {
       opacity: 1;
       font-weight: bold;
-    }
-  }
-
-  &.DarkMode {
-    .Border {
-      border-color: #444;
     }
   }
 }

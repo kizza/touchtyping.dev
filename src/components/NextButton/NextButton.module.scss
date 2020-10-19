@@ -1,21 +1,40 @@
+@import "../../shared";
+
 .NextButton {
   margin: 1em 0;
   opacity: 1;
   transition: opacity 1s;
-  border: solid 1px #ccc;
+  border: solid 1px var(--button);
+  background: var(--background);
   font-family: inherit;
   font-size: 1.4em;
   padding: 0.5em 1.6em;
   text-align: left;
   color: inherit;
+  cursor: pointer;
+    @extend %no-tap-highlight;
 
-  &.Enabled {
-    opacity: 1;
-    font-weight: bold;
+  &:hover,
+  &:focus {
+    border-color: var(--primary);
+    color: var(--primary);
   }
 
-  &.DarkMode {
-    background: #111;
-    border-color: #000;
+  &:focus {
+    outline: var(--primary);
+  }
+
+  &.Enabled {
+    font-weight: bold;
+    border-color: var(--success);
+    color: var(--success);
+    &:hover {
+      background: var(--correct-bg);
+    }
+  }
+
+  &:active {
+    background: var(--primary);
+    color: var(--background);
   }
 }

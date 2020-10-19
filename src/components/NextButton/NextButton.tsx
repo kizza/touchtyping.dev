@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useContext } from "react";
 import classnames from "classnames";
+import React, { useEffect, useRef } from "react";
 import styles from "./NextButton.module.scss";
-import { SettingsContext } from "../../hooks/useSettings";
 
 interface Props {
   allTyped: boolean;
@@ -10,8 +9,6 @@ interface Props {
 
 export default ({ allTyped, onCompleted }: Props) => {
   const nextButton = useRef<HTMLButtonElement>(null);
-
-  const { darkMode } = useContext(SettingsContext);
 
   const nextButtonClick = () => {
     nextButton.current && nextButton.current.blur();
@@ -27,7 +24,6 @@ export default ({ allTyped, onCompleted }: Props) => {
   return (
     <button
       className={classnames(styles.NextButton, {
-        [styles.DarkMode]: darkMode,
         [styles.Enabled]: allTyped,
       })}
       onClick={nextButtonClick}

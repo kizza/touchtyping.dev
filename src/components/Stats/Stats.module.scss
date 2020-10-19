@@ -1,9 +1,22 @@
 .Stats {
   float: right;
-  margin-top: 1.9em;
-  font-size: 1.2em;
+  margin-top: 2.3em;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  font-size: 0.9em;
 
   span + span {
     margin-left: 1em;
+  }
+
+  strong {
+    font-size: 1.5em;
+    position: relative;
+    top: 0.1em;
+    left: -0.1em;
+  }
+
+  &.Visible {
+    opacity: 1;
   }
 }

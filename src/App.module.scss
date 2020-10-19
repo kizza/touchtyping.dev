@@ -6,9 +6,11 @@
   position: relative;
   color: var(--text);
 
-  --primary: red;
-  --text: $primary;
-  --light-text: #999;
+  --background: white;
+  --primary: #0082ff;
+  --text: #222;
+  --button: #e2e2e2;
+  --success: green;
 
   --syntax-const: #b07305;
   --syntax-variable: purple;
@@ -18,24 +20,34 @@
   --corrected-bg: #ffe9b2;
   --incorrect-bg: pink;
   --incorrect-fg: darkred;
-
   --untyped-fg: grey;
-  --cursor-colour: blue;
 
-  &.DarkMode {
-    --primary: #e959ba;
-    --text: #adb9b9;
-    --light-text: #ccc;
+  &.Gruvbox {
+    --background: #282828;
+    --primary: #FABD2F;
+    --text: #EBDBB2;
+    --button: #504945;
+    --success: #8EC07C;
 
-    --correct-fg: #fafffa;
-    --correct-bg: #2f442f;
-    --corrected-bg: #685933;
+    --correct-fg: #fff;
+    --correct-bg: #3d4a38;
+    --corrected-bg: #9b7d30;
     --incorrect-bg: #4f3535;
     --incorrect-fg: pink;
-
-    --untyped-fg: #999;
-    --cursor-colour: pink;
+    --untyped-fg: #897B6E;
   }
+
+  // Main horizontal padding
+  --horizontal-padding: 20px;
+  @media (min-width: $breakpoint-tablet) {
+    --horizontal-padding: 56px;
+  }
+
+  display: none;
+  &.Loaded {
+    display: block;
+  }
+
 }
 
 // .Blurred {
@@ -43,7 +55,7 @@
 // }
 
 .Page {
-  transform: filter ease-out 4.4s;
+  transition: filter ease-out 4.4s;
 }
 
 .Content {
@@ -61,8 +73,13 @@
   .Inner {
     position: relative;
     margin: 0 auto;
-    padding: 0 2em;
+    padding: 0 var(--horizontal-padding);
     text-align: center;
+  }
+
+  padding-top: 0em;
+  @media (min-width: $breakpoint-tablet) {
+    padding: 2em 0;
   }
 }
 

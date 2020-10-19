@@ -1,6 +1,4 @@
 import classnames from "classnames";
-import React from "react";
-import Mask from "../components/Mask/Mask";
 import { useToggleState } from "./useToggleState";
 
 export const useInterface = (styles: Record<string, any>) => {
@@ -27,14 +25,16 @@ export const useInterface = (styles: Record<string, any>) => {
     showMask && styles.Blurred
   );
 
-  const MaskComponent = () => (
-    <Mask showing={showMask} closing={menuClosing} onClose={closeMask} />
-  );
+  const maskProps = {
+    showing: showMask,
+    closing: menuClosing,
+    onClose: closeMask,
+  };
 
   return {
     pageClassNames,
     contentClassNames,
-    Mask: MaskComponent,
+    maskProps,
     openMenu,
     closeMenu,
     menuOpen,

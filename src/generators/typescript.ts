@@ -64,7 +64,7 @@ export const buildBasicFunction2 = () => {
 
   const destructured = [
     `const { ${var2}, ${var3} } = ${functionName()}(${var1}, ${arg2})`,
-    `const [ ${var2}, ${var3} ] = ${functionName()}(${var1}, ${arg2})`,
+    `const [${var2}, ${var3}] = ${functionName()}(${var1}, ${arg2})`,
   ];
 
   return (

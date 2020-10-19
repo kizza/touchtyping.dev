@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Challenge from "../components/Challenge/Challenge";
 import { buildRandomFunction } from "../generators";
 import useKeyboard from "../hooks/useKeyboard";
@@ -22,6 +22,12 @@ export default () => {
     clearStartTime();
     setText(buildRandomFunction());
   };
+
+  const firstKeyPressIsEnter = typed === "\n" && startTime === undefined;
+  if (firstKeyPressIsEnter) {
+    onCompleted();
+  }
+
   return (
     <Challenge
       letters={letters}

@@ -3,6 +3,7 @@ import React from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import Toggle from "../Toggle/Toggle";
 import styles from "./Nav.module.scss";
+import { faMoon, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
 interface Props extends RouteComponentProps {
   open: boolean;
@@ -45,8 +46,18 @@ const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
         </li>
       </ul>
       <div>
-        <Toggle setting="playKeypress" emoji="EmojiSound" />
-        <Toggle setting="darkMode" emoji="EmojiTheme" />
+        <Toggle
+          label="Play keypress"
+          setting="playKeypress"
+          iconOn={faVolumeUp}
+          iconOff={faVolumeUp}
+        />
+        <Toggle
+          label="Dark mode"
+          setting="darkMode"
+          iconOn={faMoon}
+          iconOff={faMoon}
+        />
       </div>
     </div>
   );

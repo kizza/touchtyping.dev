@@ -5,9 +5,18 @@
   position: relative;
   display: block;
   float: left;
+  text-align: left;
 
   h1 {
-    margin: 1em 0;
+    cursor: default;
+    margin: 1.4em 0;
+    font-size: 1.6em;
+    width: 100%;
+    text-align: center;
+    @media (min-width: $breakpoint-tablet) {
+      margin: 1em 0;
+      font-size: 2em;
+    }
   }
 
   .Overlay {
@@ -21,9 +30,10 @@
     font-size: 1.8em;
     position: absolute;
     z-index: 10;
-    top: 0.6em;
-    left: 0.3em;
-    padding: 0.8em;
+    top: 0.8em;
+    left: -0.8em;
+    margin-left: var(--horizontal-padding);
+    padding: 0.8em 0 0.8em var(--horizontal-padding) + 58px;
     width: 2.5em;
     height: 2.5em;
     border-radius: 50%;
@@ -36,6 +46,7 @@
 
     svg {
       margin: auto;
+      position: relative;
       fill: var(--text);
     }
 
@@ -54,8 +65,10 @@
     transition: opacity 0.5s;
 
     span {
-      font-size: 1px; text-indent: 9999px;
-      position: absolute; top: -9999px;
+      font-size: 1px;
+      text-indent: 9999px;
+      position: absolute;
+      top: -9999px;
     }
 
     svg {

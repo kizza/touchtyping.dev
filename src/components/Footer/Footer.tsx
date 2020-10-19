@@ -12,7 +12,7 @@ export default () => (
         className={styles.GithubLink}
         title="View on github"
       >
-        <FontAwesomeIcon icon={faGithub} size="lg" />
+        <FontAwesomeIcon icon={faGithub} size="lg" fixedWidth={true} />
         <span>View on github </span>
       </a>
     </p>

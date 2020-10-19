@@ -1,13 +1,13 @@
-import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { SettingsContext } from "../../hooks/useSettings";
 import styles from "./Toggle.module.scss";
 
-export type EmojiType = "EmojiHappy" | "EmojiSound" | "EmojiTheme";
-
 interface Props {
+  label: string;
   setting: "playKeypress" | "darkMode";
-  emoji: EmojiType;
+  iconOn: any;
+  iconOff: any;
 }
 
 export const getValue = (id: string, fallback: boolean) => {
@@ -21,12 +21,12 @@ export const getValue = (id: string, fallback: boolean) => {
 
 const setValue = (id: string, value: string) => localStorage.setItem(id, value);
 
-export const buildId = (emoji: EmojiType) => {
-  return `toggle${emoji}`;
+export const buildId = (setting: Props["setting"]) => {
+  return `toggle-${setting}`;
 };
 
-export default ({ setting, emoji }: Props) => {
-  const id = buildId(emoji);
+export default ({ label, setting, iconOn, iconOff }: Props) => {
+  const id = buildId(setting);
   const settings = useContext(SettingsContext);
   const checked = settings[setting];
   const { setChecked } = settings;
@@ -38,7 +38,7 @@ export default ({ setting, emoji }: Props) => {
   };
 
   return (
-    <div className={classnames(styles.EmojiToggle, styles[emoji])}>
+    <div className={styles.EmojiToggle}>
       <input
         type="checkbox"
         onChange={onChange}
@@ -46,8 +46,13 @@ export default ({ setting, emoji }: Props) => {
         checked={checked}
         className={styles.Toggle}
       />
-      <div className={styles.Emoji}></div>
-      <label htmlFor={id} className={styles.Well}></label>
+      <div className={styles.Handle}>
+        <FontAwesomeIcon icon={checked ? iconOn : iconOff} size="sm" />
+      </div>
+      <label htmlFor={id} className={styles.Well}>
+        <FontAwesomeIcon icon={checked ? iconOn : iconOff} size="2x" />
+        <span>{label}</span>
+      </label>
     </div>
   );
 };

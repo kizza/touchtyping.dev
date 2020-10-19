@@ -1,38 +1,32 @@
 @import "../../shared";
 
-// From https://css-tricks.com/emoji-toggles/
-
 // Base class
 .EmojiToggle {
   position: relative;
-  width: 60px;
-  // margin: 40px auto;
+  width: 4em;
   margin: 40px 2em;
 
   .Well {
     display: block;
-    background: #eee;
-    transition: background 0.2s ease-out;
-    height: 20px;
-    border-radius: 10px;
+    border: solid 1px var(--background);
+    border-radius: 50%;
+    background: var(--button);
+    padding: 1.3em 1em;
     cursor: pointer;
-    &:before,
-    &:after {
-      padding: 0.4em;
-      margin-top: -0.4em;
+    @extend %no-tap-highlight;
+
+    svg {
+      position: absolute;
+      transition: color 0.2s ease-out;
+      color: var(--background);
+      top: 0.5em;
+      left: 0.46em;
     }
-    &:before {
-      padding-left: 2em;
+  }
+
+  &:hover {
+    .Well {
     }
-    &:after {
-      padding-right: 2em;
-    }
-    // &:before {
-    //   font-weight: bold;
-    // }
-    // &:after {
-    //   font-weight: normal;
-    // }
   }
 
   .Toggle {
@@ -45,8 +39,10 @@
     position: absolute;
     cursor: pointer;
     z-index: 100;
+    @extend %no-tap-highlight;
 
-    ~.Emoji:before {
+    ~ .Handle {
+      display: none;
       content: "\01F431";
       position: absolute;
       left: 0;
@@ -56,28 +52,21 @@
     }
 
     &:checked {
-      ~.Emoji:before {
-        left: 100%;
-        margin-left: -0.8em;
+      ~ .Well {
+        color: var(--primary);
+        svg {
+          color: var(--primary) !important;
+        }
       }
-      ~.Well {
-        background: $primary;
-      }
-      // ~.Well:before {
-      //   font-weight: normal;
-      // }
-      // ~.Well:after {
-      //   font-weight: bold;
-      // }
     }
 
-    ~label {
+    ~ label {
       white-space: nowrap;
-      &:before {
-        // position: absolute;
-        // right: 100%;
-        // margin-right: 5px;
-        // top: 0;
+      span {
+        font-size: 1.1em;
+        padding: 1.6em 1em;
+        padding-left: 3.4em;
+        position: relative;
       }
       &:after {
         position: absolute;
@@ -85,46 +74,9 @@
         margin-left: 10px;
         top: 0;
       }
-    }
-  }
-}
-
-@mixin emojiType($leftEmoji, $rightEmoji, $leftLabel, $rightLabel) {
-  .Toggle {
-    ~.Emoji:before {
-      content: $leftEmoji;
-    }
-    &:checked {
-      ~.Emoji:before {
-        content: $rightEmoji;
-      }
-    }
-     ~label {
-      &:before {
-        // content: $leftLabel;
-        content: "";
-      }
-      &:after {
-        content: $rightLabel;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
 }
-
-.EmojiHappy {
-  @include emojiType(
-    "\01F604", "\01F620", "Happy", "Mad"
-  );
-}
-
-.EmojiSound {
-  @include emojiType(
-    "\01F508", "\01F50A", "Muted", "Keypress Sound"
-  )
-};
-
-.EmojiTheme {
-  @include emojiType(
-    "😎", "😈", "Light", "Dark Mode"
-  )
-};

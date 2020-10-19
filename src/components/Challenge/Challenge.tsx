@@ -71,6 +71,7 @@ export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
         <NextButton allTyped={allTyped} onCompleted={onCompleted} />
 
         <Stats
+          visible={startTime !== undefined}
           accuracy={accuracy}
           wordsPerMinute={wordsPerMinute}
           completedWordCount={completedWordCount}
