@@ -3,6 +3,12 @@
 .Challenge {
   text-align: center;
 
+  .Confetti {
+    position: absolute;
+    left: 50%;
+    // top: 5em;
+  }
+
   .Inner {
     max-width: 1400px;
     display: block;

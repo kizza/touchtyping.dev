@@ -1,5 +1,6 @@
 import classnames from "classnames";
 import React from "react";
+import Confetti, { ConfettiConfig } from "react-dom-confetti";
 import { Syntax } from "../Word/Word";
 import styles from "./Char.module.scss";
 
@@ -41,6 +42,19 @@ const formatChar = (char?: string) => {
   }
 };
 
+const confettiConfig: ConfettiConfig = {
+  angle: 90,
+  spread: 10,
+  startVelocity: 16,
+  elementCount: 4,
+  dragFriction: 0.12,
+  duration: 400,
+  stagger: 3,
+  width: "8px",
+  height: "8px",
+  colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
+};
+
 export default ({
   char,
   typedChar,
@@ -58,6 +72,10 @@ export default ({
         styles[status]
       )}
     >
+      <div className={styles.Confetti}>
+        <Confetti config={confettiConfig} active={status === "Correct"} />
+      </div>
+
       <span>{formatChar(char)}</span>
       <span
         className={classnames(

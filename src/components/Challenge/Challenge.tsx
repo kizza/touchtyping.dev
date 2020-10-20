@@ -12,6 +12,8 @@ import { WordProps } from "../Word/Word";
 import styles from "./Challenge.module.scss";
 import { SettingsContext } from "../../hooks/useSettings";
 
+import Confetti, { ConfettiConfig } from "react-dom-confetti";
+
 interface Props {
   letters: CharProps[];
   mistyped: Mistyped;
@@ -49,6 +51,19 @@ export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
     words => words.map(word => ({ letters: word })) as WordProps[]
   );
 
+  const confettiConfig: ConfettiConfig = {
+    angle: 90,
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 40,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
+  };
+
   return (
     <div
       className={classnames(
@@ -58,6 +73,10 @@ export default ({ letters, mistyped, startTime, onCompleted }: Props) => {
       )}
     >
       <div className={styles.Inner}>
+        <div className={styles.Confetti}>
+          <Confetti config={confettiConfig} active={allTyped} />
+        </div>
+
         <div
           className={classnames(styles.Border, allTyped && styles.Completed)}
         >
