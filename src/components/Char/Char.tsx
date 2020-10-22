@@ -1,8 +1,9 @@
 import classnames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
 import Confetti, { ConfettiConfig } from "react-dom-confetti";
 import { Syntax } from "../Word/Word";
 import styles from "./Char.module.scss";
+import { SettingsContext } from "../../hooks/useSettings";
 
 export type CharStatus = "Correct" | "Incorrect" | "Untyped";
 
@@ -55,6 +56,12 @@ const confettiConfig: ConfettiConfig = {
   colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
 };
 
+const confetti = (active: boolean) => (
+  <div className={styles.Confetti}>
+    <Confetti config={confettiConfig} active={active} />
+  </div>
+);
+
 export default ({
   char,
   typedChar,
@@ -62,6 +69,8 @@ export default ({
   showCursor,
   status,
 }: CharProps) => {
+  const { keypressConfetti } = useContext(SettingsContext);
+
   return (
     <div
       className={classnames(
@@ -72,10 +81,7 @@ export default ({
         styles[status]
       )}
     >
-      <div className={styles.Confetti}>
-        <Confetti config={confettiConfig} active={status === "Correct"} />
-      </div>
-
+      {keypressConfetti && confetti(status === "Correct")}
       <span>{formatChar(char)}</span>
       <span
         className={classnames(

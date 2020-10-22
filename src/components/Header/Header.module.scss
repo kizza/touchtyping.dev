@@ -32,8 +32,8 @@
     z-index: 10;
     top: 0.8em;
     left: -0.8em;
-    margin-left: var(--horizontal-padding);
-    padding: 0.8em 0 0.8em var(--horizontal-padding) + 58px;
+    margin-left: var(--gutter);
+    padding: 0.8em 0 0.8em var(--gutter) + 58px;
     width: 2.5em;
     height: 2.5em;
     border-radius: 50%;

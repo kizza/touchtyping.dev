@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Challenge from "../components/Challenge/Challenge";
 import { buildRandomFunction } from "../generators";
 import useKeyboard from "../hooks/useKeyboard";
@@ -6,9 +6,11 @@ import useMistypedKeys from "../hooks/useMistypedKeys";
 import useResult from "../hooks/useResult";
 import useSoundEffects from "../hooks/useSoundEffects";
 import useTimer from "../hooks/useTimer";
+import { SettingsContext } from "../hooks/useSettings";
 
 export default () => {
-  const [text, setText] = useState<string>(buildRandomFunction());
+  const settings = useContext(SettingsContext);
+  const [text, setText] = useState<string>(buildRandomFunction(settings));
   const [typed, clearTyped] = useKeyboard(text.length);
   const { startTime, clearStartTime } = useTimer(typed);
   const { letters } = useResult(text, typed);
@@ -16,11 +18,17 @@ export default () => {
 
   useSoundEffects(typed.length);
 
+  useEffect(() => {
+    if (letters.length === 1) {
+      console.log(letters);
+    }
+  }, [letters]);
+
   const onCompleted = () => {
     clearTyped();
     clearMistyped();
     clearStartTime();
-    setText(buildRandomFunction());
+    setText(buildRandomFunction(settings));
   };
 
   const firstKeyPressIsEnter = typed === "\n" && startTime === undefined;

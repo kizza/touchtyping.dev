@@ -38,9 +38,9 @@
   }
 
   // Main horizontal padding
-  --horizontal-padding: 20px;
+  --gutter: 30px;
   @media (min-width: $breakpoint-tablet) {
-    --horizontal-padding: 56px;
+    --gutter: 56px;
   }
 
   display: none;
@@ -48,6 +48,7 @@
     display: block;
   }
 
+  --animate-duration: 1s;
 }
 
 // .Blurred {
@@ -73,7 +74,7 @@
   .Inner {
     position: relative;
     margin: 0 auto;
-    padding: 0 var(--horizontal-padding);
+    padding: 0 var(--gutter);
     text-align: center;
   }
 

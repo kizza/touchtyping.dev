@@ -1,9 +1,16 @@
 import classnames from "classnames";
 import React from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
-import Toggle from "../Toggle/Toggle";
+import Toggle, { booleanOnSave } from "../Toggle/Toggle";
 import styles from "./Nav.module.scss";
-import { faMoon, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFileCode as faCode,
+  /* faCode, */
+  faSmile,
+  faMoon,
+  faVolumeUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { ALL_LANGUAGES } from "../../hooks/useSettings";
 
 interface Props extends RouteComponentProps {
   open: boolean;
@@ -45,18 +52,40 @@ const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
           </NavLink>
         </li>
       </ul>
-      <div>
+      <div className={styles.Toggles}>
+        <h2>Keypress</h2>
         <Toggle
           label="Play keypress"
           setting="playKeypress"
           iconOn={faVolumeUp}
           iconOff={faVolumeUp}
+          formatOnSave={booleanOnSave}
         />
+        <Toggle
+          label="Confetti"
+          setting="keypressConfetti"
+          iconOn={faSmile}
+          iconOff={faSmile}
+          formatOnSave={booleanOnSave}
+        />
+        <h2>Languages</h2>
+        {ALL_LANGUAGES.map(language => (
+          <Toggle
+            key={`toggle${language}`}
+            label={language}
+            setting={language}
+            iconOn={faCode}
+            iconOff={faCode}
+            formatOnSave={booleanOnSave}
+          />
+        ))}
+        <h2>Theme</h2>
         <Toggle
           label="Dark mode"
           setting="darkMode"
           iconOn={faMoon}
           iconOff={faMoon}
+          formatOnSave={booleanOnSave}
         />
       </div>
     </div>
