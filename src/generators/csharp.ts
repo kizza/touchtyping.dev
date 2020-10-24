@@ -1,37 +1,43 @@
-import faker from "faker";
-import { pascalize, camelize, oneOf } from "./util";
+import { camelize, ingredients, oneOf, pascalize } from "./util";
 
 const publicOrPrivate = () => oneOf(["public", "private"]);
 
-const functionName = () =>
-  pascalize(faker.fake("{{hacker.verb}} {{hacker.noun}}"));
+const functionName = (verbNoun: string) => pascalize(verbNoun);
 
-const variableName = () => camelize(faker.hacker.noun());
+const variableName = (noun: string) => camelize(noun);
 
-const typeName = (): string => {
-  const noun = faker.hacker.noun();
-  const ignore = ["array"];
-  const type = ignore.includes(noun) ? typeName() : pascalize(noun);
-
-  return oneOf([`IEnumerable<${type}>`, `I${type}`, type]);
-};
+const typeName = (noun: string, subtype: string): string =>
+  oneOf([
+    `IEnumerable<${pascalize(subtype)}>`,
+    `I${pascalize(noun)}<${pascalize(subtype)}>`,
+    `${pascalize(noun)}<${pascalize(subtype)}>`,
+    pascalize(noun),
+    pascalize(noun),
+  ]);
 
 export const buildBasicFunction = () => {
-  const type1 = typeName();
-  const type2 = typeName();
-  const type3 = typeName();
-  const arg1 = variableName();
-  const arg2 = variableName();
-  const var1 = variableName();
-  const var2 = variableName();
+  const {
+    function1,
+    function2,
+    function3,
+    function4,
+    type1,
+    type2,
+    type3,
+    arg1,
+    arg2,
+    var1,
+    var2,
+  } = ingredients(functionName, variableName, variableName, typeName);
+
   return (
     [
-      `${publicOrPrivate()} ${type1} ${functionName()} (${type2} ${arg1}, ${type3} ${arg2})`,
+      `${publicOrPrivate()} ${type1} ${function1} (${type2} ${arg1}, ${type3} ${arg2})`,
       `{`,
-      `var ${var1} = ${functionName()}(${arg1});`,
-      `var ${var2} = ${functionName()}(${var1}, ${arg2});`,
+      `var ${var1} = ${function2}(${arg1});`,
+      `var ${var2} = ${function3}(${var1}, ${arg2});`,
       ``,
-      `return ${functionName()}(${var2});`,
+      `return ${function4}(${var2});`,
       `}`,
     ].join("\n") + "\n"
   );

@@ -1,51 +1,48 @@
-import faker from "faker";
-import { pascalize, camelize, oneOf } from "./util";
+import { camelize, ingredients, oneOf, pascalize, Formatter } from "./util";
 
-const functionName = () =>
-  camelize(faker.fake("{{hacker.verb}} {{hacker.noun}}"));
+export const functionName = (verbNoun: string) => camelize(verbNoun);
 
-const variableName = () => camelize(faker.hacker.noun());
+export const variableName = (noun: string) => camelize(noun);
 
-const typeName = (): string => {
-  const noun = faker.hacker.noun();
-  const ignore = ["array"];
-  const type1 = ignore.includes(noun) ? typeName() : pascalize(noun);
-  const type2 = pascalize(faker.hacker.noun());
-  return oneOf([`${type1}<${type2}>`, type2]);
-};
+const typeName = (noun: string, subtype: string): string =>
+  oneOf([`${pascalize(noun)}<${pascalize(subtype)}>`, pascalize(noun)]);
 
-const expression = (var1: string, arg1: string, arg2: string) =>
+const expression = (
+  var1: string,
+  function1: string,
+  arg1: string,
+  arg2: string
+) =>
   oneOf([
-    `const ${var1} = ${functionName()}(${arg1}, ${arg2})`,
-    `const ${var1} = ${arg1}.${functionName()}(${arg2})`,
+    `const ${var1} = ${function1}(${arg1}, ${arg2})`,
+    `const ${var1} = ${arg1}.${function1}(${arg2})`,
   ]);
 
-const ingredients = () => ({
-  type1: typeName(),
-  type2: typeName(),
-  arg1: camelize(faker.hacker.noun()),
-  arg2: camelize(faker.hacker.noun()),
-  var1: variableName(),
-  var2: variableName(),
-  var3: variableName(),
-});
-
 export const buildBasicFunction = () => {
-  const { type1, type2, arg1, arg2, var1, var2 } = ingredients();
+  const {
+    function1,
+    function2,
+    type1,
+    type2,
+    arg1,
+    arg2,
+    var1,
+    var2,
+  } = ingredients(functionName, variableName, variableName, typeName);
 
   const returns = [
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2}) || ${oneOf(["true", "false"])}`,
-    `return ${var2} && ${functionName()}(${var2})`,
+    `return ${function1}(${var2})`,
+    `return ${function1}(${var2})`,
+    `return ${function1}(${var2})`,
+    `return ${function1}(${var2}) || ${oneOf(["true", "false"])}`,
+    `return ${var2} && ${function1}(${var2})`,
   ];
 
   return (
     [
-      `const ${functionName()} = (${arg1}: ${type1}, ${arg2}: ${type2}) => {`,
-      `const ${var1} = ${functionName()}(${arg1})`,
-      expression(var2, var1, arg2),
+      `const ${function2} = (${arg1}: ${type1}, ${arg2}: ${type2}) => {`,
+      `const ${var1} = ${function2}(${arg1})`,
+      expression(var2, function1, var1, arg2),
       ``,
       oneOf(returns),
       `}`,
@@ -54,23 +51,34 @@ export const buildBasicFunction = () => {
 };
 
 export const buildBasicFunction2 = () => {
-  const { type1, type2, arg1, arg2, var1, var2, var3 } = ingredients();
+  const {
+    function1,
+    function2,
+    function3,
+    type1,
+    type2,
+    arg1,
+    arg2,
+    var1,
+    var2,
+    var3,
+  } = ingredients(functionName, variableName, variableName, typeName);
 
   const returns = [
-    `return ${functionName()}(${var2}, ${var3})`,
-    `return ${functionName()}(${var2}) || ${var3}`,
-    `return ${var2} ? ${functionName()}() || ${var3}`,
+    `return ${function3}(${var2}, ${var3})`,
+    `return ${function3}(${var2}) || ${var3}`,
+    `return ${var2} ? ${function3}() : ${var3}`,
   ];
 
   const destructured = [
-    `const { ${var2}, ${var3} } = ${functionName()}(${var1}, ${arg2})`,
-    `const [${var2}, ${var3}] = ${functionName()}(${var1}, ${arg2})`,
+    `const { ${var2}, ${var3} } = ${function2}(${var1}, ${arg2})`,
+    `const [${var2}, ${var3}] = ${function2}(${var1}, ${arg2})`,
   ];
 
   return (
     [
-      `const ${functionName()} = (${arg1}: ${type1}, ${arg2}: ${type2}) => {`,
-      `const ${var1} = ${functionName()}(${arg1})`,
+      `const ${function1} = (${arg1}: ${type1}, ${arg2}: ${type2}) => {`,
+      `const ${var1} = ${function1}(${arg1})`,
       oneOf(destructured),
       ``,
       oneOf(returns),

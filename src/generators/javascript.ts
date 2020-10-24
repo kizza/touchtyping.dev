@@ -1,45 +1,42 @@
-import faker from "faker";
-import { camelize, oneOf } from "./util";
+import { functionName, variableName } from "./typescript";
+import { ingredients, oneOf } from "./util";
 
-const functionName = () =>
-  camelize(faker.fake("{{hacker.verb}} {{hacker.noun}}"));
-
-const variableName = () => camelize(faker.hacker.noun());
-
-const expression = (var1: string, arg1: string, arg2: string) =>
+const expression = (
+  var1: string,
+  function1: string,
+  arg1: string,
+  arg2: string
+) =>
   oneOf([
-    `const ${var1} = ${functionName()}(${arg1}, ${arg2})`,
-    `const ${var1} = ${arg1}.${functionName()}(${arg2})`,
+    `const ${var1} = ${function1}(${arg1}, ${arg2})`,
+    `const ${var1} = ${arg1}.${function1}(${arg2})`,
   ]);
 
-const returnFunction = (variable: string) =>
-  oneOf([`return ${functionName()}(${variable})`]);
-// oneOf([`return ${functionName()}(${variable})`, `return ${variable}`]);
-
-const ingredients = () => ({
-  arg1: camelize(faker.hacker.noun()),
-  arg2: camelize(faker.hacker.noun()),
-  var1: variableName(),
-  var2: variableName(),
-  var3: variableName(),
-});
-
 export const buildBasicFunction = () => {
-  const { arg1, arg2, var1, var2 } = ingredients();
+  const {
+    function1,
+    function2,
+    function3,
+    function4,
+    arg1,
+    arg2,
+    var1,
+    var2,
+  } = ingredients(functionName, variableName, variableName, variableName);
 
   const returns = [
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2})`,
-    `return ${functionName()}(${var2}) || ${oneOf(["true", "false"])}`,
-    `return ${var2} && ${functionName()}(${var2})`,
+    `return ${function4}(${var2})`,
+    `return ${function4}(${var2})`,
+    `return ${function4}(${var2})`,
+    `return ${function4}(${var2}) || ${oneOf(["true", "false"])}`,
+    `return ${var2} && ${function4}(${var2})`,
   ];
 
   return (
     [
-      `function ${functionName()} (${arg1}, ${arg2}) {`,
-      `const ${var1} = ${functionName()}(${arg1})`,
-      expression(var2, var1, arg2),
+      `function ${function1}(${arg1}, ${arg2}) {`,
+      `const ${var1} = ${function2}(${arg1})`,
+      expression(var2, function3, var1, arg2),
       ``,
       oneOf(returns),
       `}`,

@@ -3,17 +3,13 @@ import classnames from "classnames";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import styles from "./App.module.scss";
+import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
+import Mask from "./components/Mask/Mask";
 import Nav from "./components/Nav/Nav";
 import { useInterface } from "./hooks/useInterface";
-import {
-  SettingsContext,
-  useInitialSettings,
-  Settings,
-} from "./hooks/useSettings";
+import { SettingsContext, useInitialSettings } from "./hooks/useSettings";
 import routes from "./routes";
-import Footer from "./components/Footer/Footer";
-import Mask from "./components/Mask/Mask";
 
 const useDarkMode = (darkMode: boolean) => {
   useEffect(() => {

@@ -1,51 +1,45 @@
-import faker from "faker";
-import { pascalize, camelize, oneOf } from "./util";
+import { ingredients, oneOf } from "./util";
 
-const functionName = () =>
-  faker.fake("{{hacker.verb}}_{{hacker.noun}}").toLowerCase();
+const functionName = (verbNoun: string) =>
+  verbNoun.replace(/ /g, "_").toLowerCase();
 
-const variableName = () => camelize(faker.hacker.noun());
+const variableName = functionName;
 
-// const typeName = (): string => {
-//   const noun = faker.hacker.noun();
-//   const ignore = ["array"];
-//   // const type1 = ignore.includes(noun) ? typeName() : pascalize(noun);
-//   // const type2 = pascalize(faker.hacker.noun());
-//   return oneOf([`${type1}<${type2}>`, type2]);
-// };
-
-const expression = (var1: string, arg1: string, arg2: string) =>
+const expression = (
+  var1: string,
+  function1: string,
+  arg1: string,
+  arg2: string
+) =>
   oneOf([
-    `${var1} = ${functionName()} ${arg1}, ${arg2}`,
-    `${var1} = ${arg1}.${functionName()} ${arg2}`,
+    `${var1} = ${function1} ${arg1}, ${arg2}`,
+    `${var1} = ${arg1}.${function1} ${arg2}`,
   ]);
 
-const ingredients = () => ({
-  // type1: typeName(),
-  // type2: typeName(),
-  arg1: camelize(faker.hacker.noun()),
-  arg2: camelize(faker.hacker.noun()),
-  var1: variableName(),
-  var2: variableName(),
-  var3: variableName(),
-});
-
 export const buildBasicFunction = () => {
-  const { arg1, arg2, var1, var2 } = ingredients();
+  const {
+    function1,
+    function2,
+    function3,
+    function4,
+    arg1,
+    arg2,
+    var1,
+    var2,
+  } = ingredients(functionName, variableName, variableName, variableName);
 
   const returns = [
-    `${functionName()} ${var2}`,
-    `${functionName()} ${var2}`,
-    `${functionName()} ${var2}`,
-    `${functionName()} ${var2} || ${oneOf(["true", "false"])}`,
-    `${var2} if ${functionName()}(${var2})`,
+    `${function4} ${var2}`,
+    `${function4} ${var2}`,
+    `${function4} ${var2}`,
+    `${var2} if ${function4}(${var2})`,
   ];
 
   return (
     [
-      `def ${functionName()} (${arg1}, ${oneOf(["", "*", "**"])}${arg2})`,
-      expression(var2, var1, arg2),
-      `${var1} = ${functionName()} ${arg1}`,
+      `def ${function1} (${arg1}, ${oneOf(["", "*", "**"])}${arg2})`,
+      expression(var2, function2, var1, arg2),
+      `${var1} = ${function3} ${arg1}`,
       ``,
       oneOf(returns),
       `end`,
@@ -54,19 +48,29 @@ export const buildBasicFunction = () => {
 };
 
 export const buildBasicFunction2 = () => {
-  const { arg1, arg2, var1, var2, var3 } = ingredients();
+  const {
+    function1,
+    function2,
+    function3,
+    function4,
+    arg1,
+    arg2,
+    var1,
+    var2,
+    var3,
+  } = ingredients(functionName, variableName, variableName, variableName);
 
   const returns = [
-    `return ${functionName()} ${var2}, ${var3}`,
-    `return ${functionName()} ${var2} || ${var3}`,
-    `return ${var2} if ${functionName()}()`,
+    `return ${function4} ${var2}, ${var3}`,
+    `return ${function4} ${var2} || ${var3}`,
+    `return ${var2} if ${function4}`,
   ];
 
   return (
     [
-      `def ${functionName()} (${arg1}, ${arg2})`,
-      `${var1} = ${functionName()} ${arg1}`,
-      `${var2}, ${var3} = ${functionName()} ${var1}, ${arg2}`,
+      `def ${function1} (${arg1}, ${arg2})`,
+      `${var1} = ${function2} ${arg1}`,
+      `${var2}, ${var3} = ${function3} ${var1}, ${arg2}`,
       ``,
       oneOf(returns),
       `end`,

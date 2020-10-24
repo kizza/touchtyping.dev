@@ -4,8 +4,8 @@ import { getBoolean } from "../components/Toggle/Toggle";
 export const ALL_LANGUAGES = [
   "Typescript",
   "Javascript",
-  "Ruby",
   "CSharp",
+  "Ruby",
 ] as const;
 
 export type Language = typeof ALL_LANGUAGES[number];
@@ -17,16 +17,18 @@ export type Settings = {
   setChecked: (id: keyof Settings, value: boolean) => void;
 } & Record<Language, boolean>;
 
-export const SettingsContext = createContext<Settings>({
+const defaults = {
   playKeypress: true,
   keypressConfetti: true,
   darkMode: false,
-  Javascript: true,
-  Typescript: true,
-  Ruby: true,
   CSharp: true,
+  Typescript: true,
+  Javascript: false,
+  Ruby: false,
   setChecked: () => {},
-});
+};
+
+export const SettingsContext = createContext<Settings>(defaults);
 
 interface LanguageSettings {
   values: Record<Language, boolean>;
@@ -35,7 +37,9 @@ interface LanguageSettings {
 
 const getLanguageSettings = () =>
   ALL_LANGUAGES.reduce((acc, language) => {
-    const [value, setValue] = useState<boolean>(getBoolean(language, true));
+    const [value, setValue] = useState<boolean>(
+      getBoolean(language, defaults[language])
+    );
     return {
       values: {
         ...acc.values,
@@ -55,7 +59,6 @@ const setLanguageSetting = (
 ) => {
   const setter = languageSettings.setters[id];
   if (setter) {
-    console.log("Setting language", id, value);
     setter(value);
     return true;
   }

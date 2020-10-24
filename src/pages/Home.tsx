@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useState } from "react";
 import Challenge from "../components/Challenge/Challenge";
 import { buildRandomFunction } from "../generators";
 import useKeyboard from "../hooks/useKeyboard";
 import useMistypedKeys from "../hooks/useMistypedKeys";
 import useResult from "../hooks/useResult";
+import { SettingsContext } from "../hooks/useSettings";
 import useSoundEffects from "../hooks/useSoundEffects";
 import useTimer from "../hooks/useTimer";
-import { SettingsContext } from "../hooks/useSettings";
 
 export default () => {
   const settings = useContext(SettingsContext);
@@ -17,12 +17,6 @@ export default () => {
   const { mistyped, clearMistyped } = useMistypedKeys(letters);
 
   useSoundEffects(typed.length);
-
-  useEffect(() => {
-    if (letters.length === 1) {
-      console.log(letters);
-    }
-  }, [letters]);
 
   const onCompleted = () => {
     clearTyped();

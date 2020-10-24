@@ -10,7 +10,7 @@ It's also quite fun to play around with react, hooks and serverless.
 
 - Create react app
 - Lots of hooks and functional components
-- Uses [Faker.js](https://github.com/marak/Faker.js/) to generate function bodies
+- Inspired by [Faker.js](https://github.com/marak/Faker.js/) to generate function bodies
 - Deployed to aws via [serverless](https://github.com/serverless-components/website)
 
 ### Run online
