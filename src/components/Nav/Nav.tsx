@@ -81,8 +81,6 @@ const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
           iconOff={faSmile}
           formatOnSave={booleanOnSave}
         />
-        <h2>Languages</h2>
-        {languageSettings()}
         <h2>Theme</h2>
         <Toggle
           label="Dark mode"
@@ -91,6 +89,8 @@ const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
           iconOff={faMoon}
           formatOnSave={booleanOnSave}
         />
+        <h2>Languages</h2>
+        {languageSettings()}
       </div>
     </div>
   );
