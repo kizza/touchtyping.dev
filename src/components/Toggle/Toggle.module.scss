@@ -1,27 +1,42 @@
 @import "../../shared";
 
-// Base class
+$width: 3em;
+$height: 0.88em;
+
 .EmojiToggle {
   position: relative;
   width: 4em;
-  margin: 0 2em 0 2em;
+  margin: 0 2em 0.4em 2em;
 
   .Well {
     display: block;
     border: none;
-    // border: solid 1px var(--background);
-    // border-radius: 50%;
-    // background: var(--button);
-    padding: 1.3em 1.3em;
+    border: solid 1px var(--background);
+    border-radius: 50%;
+    background: var(--button);
+    padding: $height 0em;
+    width: $width;
     cursor: pointer;
     @extend %no-tap-highlight;
 
-    svg {
+    .Badge {
+      font-size: 1.7em;
       position: absolute;
       transition: color 0.1s;
-      color: var(--button);
-      top: 0.5em;
-      left: 0.46em;
+      color: var(--background);
+      top: 0.47em;
+      left: 0.3em;
+    }
+
+    strong.Badge {
+      font-size: 1.2em;
+      padding: 0;
+      text-align: center;
+      width: 2.6em;
+      box-sizing: content-box;
+      left: 0;
+      top: 0.64em;
+      color: var(--background);
     }
   }
 
@@ -42,21 +57,22 @@
     z-index: 100;
     @extend %no-tap-highlight;
 
-    ~ .Handle {
-      display: none;
-      content: "\01F431";
-      position: absolute;
-      left: 0;
-      top: -15px;
-      font-size: 40px;
-      transition: 0.2s;
-    }
+    // ~ .Handle {
+    //   display: none;
+    //   content: "\01F431";
+    //   position: absolute;
+    //   left: 0;
+    //   top: -15px;
+    //   font-size: 40px;
+    //   transition: 0.2s;
+    // }
 
     &:checked {
       ~ .Well {
         color: var(--primary);
-        svg {
-          color: var(--primary) !important;
+        background: var(--primary);
+        .Badge {
+          color: var(--background) !important;
         }
       }
     }
@@ -66,7 +82,7 @@
       span {
         font-size: 1.1em;
         padding: 1.6em 1em;
-        padding-left: 3em;
+        padding-left: 3.3em;
         position: relative;
       }
       &:after {
@@ -78,7 +94,8 @@
       &:hover {
         text-decoration: underline;
       }
-      &:active, a:focus {
+      &:active,
+      &:focus {
         text-decoration: none;
       }
     }

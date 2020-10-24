@@ -10,7 +10,7 @@ import {
   faMoon,
   faVolumeUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { ALL_LANGUAGES } from "../../hooks/useSettings";
+import { ALL_LANGUAGES, Language } from "../../hooks/useSettings";
 
 interface Props extends RouteComponentProps {
   open: boolean;
@@ -18,6 +18,19 @@ interface Props extends RouteComponentProps {
   closeMenu: () => void;
   darkMode: boolean;
 }
+
+const languageSettings = () => {
+  const languages = Object.keys(ALL_LANGUAGES) as Language[];
+  return languages.map(language => (
+    <Toggle
+      key={`toggle${language}`}
+      label={language}
+      setting={language}
+      textIcon={ALL_LANGUAGES[language]}
+      formatOnSave={booleanOnSave}
+    />
+  ));
+};
 
 const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
   return (
@@ -69,16 +82,7 @@ const Nav = ({ open, closing, closeMenu, darkMode }: Props) => {
           formatOnSave={booleanOnSave}
         />
         <h2>Languages</h2>
-        {ALL_LANGUAGES.map(language => (
-          <Toggle
-            key={`toggle${language}`}
-            label={language}
-            setting={language}
-            iconOn={faCode}
-            iconOff={faCode}
-            formatOnSave={booleanOnSave}
-          />
-        ))}
+        {languageSettings()}
         <h2>Theme</h2>
         <Toggle
           label="Dark mode"

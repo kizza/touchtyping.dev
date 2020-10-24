@@ -1,14 +1,14 @@
 import { createContext, useState } from "react";
 import { getBoolean } from "../components/Toggle/Toggle";
 
-export const ALL_LANGUAGES = [
-  "Typescript",
-  "Javascript",
-  "CSharp",
-  "Ruby",
-] as const;
+export const ALL_LANGUAGES = {
+  Typescript: "ts",
+  Javascript: "js",
+  CSharp: "cs",
+  Ruby: "rb",
+} as const;
 
-export type Language = typeof ALL_LANGUAGES[number];
+export type Language = keyof typeof ALL_LANGUAGES;
 
 export type Settings = {
   playKeypress: boolean;
@@ -35,8 +35,9 @@ interface LanguageSettings {
   setters: Record<Language, (value: string) => void>;
 }
 
-const getLanguageSettings = () =>
-  ALL_LANGUAGES.reduce((acc, language) => {
+const getLanguageSettings = () => {
+  const languages = Object.keys(ALL_LANGUAGES) as Language[];
+  return languages.reduce((acc, language) => {
     const [value, setValue] = useState<boolean>(
       getBoolean(language, defaults[language])
     );
@@ -51,6 +52,7 @@ const getLanguageSettings = () =>
       },
     };
   }, {} as LanguageSettings);
+};
 
 const setLanguageSetting = (
   languageSettings: LanguageSettings,
