@@ -11,9 +11,9 @@ $height: 0.88em;
   .Well {
     display: block;
     border: none;
-    border: solid 1px var(--background);
+    border: solid 1px transparent;
     border-radius: 50%;
-    background: var(--button);
+    background: transparent;
     padding: $height 0em;
     width: $width;
     cursor: pointer;
@@ -23,7 +23,7 @@ $height: 0.88em;
       font-size: 1.7em;
       position: absolute;
       transition: color 0.1s;
-      color: var(--background);
+      color: var(--button);
       top: 0.47em;
       left: 0.3em;
     }
@@ -35,8 +35,7 @@ $height: 0.88em;
       width: 2.6em;
       box-sizing: content-box;
       left: 0;
-      top: 0.64em;
-      color: var(--background);
+      top: 0.69em;
     }
   }
 
@@ -70,9 +69,9 @@ $height: 0.88em;
     &:checked {
       ~ .Well {
         color: var(--primary);
-        background: var(--primary);
+        background: var(--highlight);
         .Badge {
-          color: var(--background) !important;
+          color: var(--primary);
         }
       }
     }
@@ -91,12 +90,10 @@ $height: 0.88em;
         margin-left: 10px;
         top: 0;
       }
-      &:hover {
-        text-decoration: underline;
-      }
-      &:active,
-      &:focus {
-        text-decoration: none;
+      @media (min-width: $breakpoint-tablet) {
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
