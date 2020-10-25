@@ -7,6 +7,7 @@ import useResult from "../hooks/useResult";
 import { SettingsContext } from "../hooks/useSettings";
 import useSoundEffects from "../hooks/useSoundEffects";
 import useTimer from "../hooks/useTimer";
+import Banner from "../components/Banner/Banner";
 
 export default () => {
   const settings = useContext(SettingsContext);
@@ -31,11 +32,17 @@ export default () => {
   }
 
   return (
-    <Challenge
-      letters={letters}
-      mistyped={mistyped}
-      startTime={startTime}
-      onCompleted={onCompleted}
-    />
+    <>
+      <Challenge
+        letters={letters}
+        mistyped={mistyped}
+        startTime={startTime}
+        onCompleted={onCompleted}
+      />
+      <Banner
+        message={`A "real" keyboard will give you the full experience`}
+        mobileOnly
+      />
+    </>
   );
 };

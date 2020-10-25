@@ -1,7 +1,15 @@
 @import "../../shared";
 
+%padded-bottom-for-banner {
+  margin-bottom: 3em;
+  @media (min-width: $breakpoint-tablet) {
+    margin-bottom: 0;
+  }
+}
+
 .Challenge {
   text-align: center;
+  @extend %padded-bottom-for-banner;
 
   .Confetti {
     position: absolute;

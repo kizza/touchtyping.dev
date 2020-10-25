@@ -1,0 +1,18 @@
+@import "../../shared";
+
+.Banner {
+  color: var(--primary);
+  background: var(--highlight);
+  padding: 0.8em 1em;
+}
+
+.MobileOnly {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  @media (min-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
