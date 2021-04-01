@@ -22,6 +22,7 @@ export default [
   "instance",
   "map",
   "matrix",
+  "membership",
   "monitor",
   "notification",
   "panel",

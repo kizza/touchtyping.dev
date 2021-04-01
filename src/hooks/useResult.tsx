@@ -10,7 +10,7 @@ interface ResultStatus {
   cursorAt: number;
 }
 
-const UNTYPED = "@";
+const UNTYPED = "^";
 
 const charStatus = ([char, typed]: ZippedChars): CharStatus => {
   if (typed === UNTYPED) {

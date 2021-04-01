@@ -1,19 +1,34 @@
-import { ingredients, oneOf } from "./util";
+import {ingredients, oneOf, snakize, pascalize} from "./util";
 
-const functionName = (verbNoun: string) =>
-  verbNoun.replace(/ /g, "_").toLowerCase();
+const maybeSpreadArgument = (argumentName: string) =>
+  oneOf(["", "**"]) + argumentName
 
-const variableName = functionName;
+const argumentName = (verbNoun: string) => snakize(verbNoun)
+
+const cleanedArgumentName = (argumentName: string) => argumentName.replace(/[*:]/g, '')
+
+const variableName = (verbNoun: string) => {
+  const name = snakize(verbNoun)
+  return oneOf([name, `@${name}`, `${name}`])
+}
+
+const functionName = (verbNoun: string) => {
+  const name = snakize(verbNoun)
+  return oneOf([name, name, name, `${name}?`, name])
+}
 
 const expression = (
   var1: string,
   function1: string,
   arg1: string,
-  arg2: string
+  arg2: string,
+  verbNoun: string
 ) =>
   oneOf([
-    `${var1} = ${function1} ${arg1}, ${arg2}`,
-    `${var1} = ${arg1}.${function1} ${arg2}`,
+    `${var1} = ${function1}(${arg1}, ${arg2})`,
+    `${var1} = ${arg1}.${function1}(${arg2})`,
+    `${var1} = ${function1}(${arg1}, "${verbNoun} #{${arg2}}")`,
+    `${var1} = ${pascalize(verbNoun)}::${function1}(${arg1}, ${arg2})`,
   ]);
 
 export const buildBasicFunction = () => {
@@ -26,20 +41,29 @@ export const buildBasicFunction = () => {
     arg2,
     var1,
     var2,
-  } = ingredients(functionName, variableName, variableName, variableName);
+    verbNoun1,
+    verbNoun2,
+  } = ingredients(functionName, argumentName, variableName, variableName);
+
+  const unless = oneOf(["if", "unless"])
 
   const returns = [
-    `${function4} ${var2}`,
-    `${function4} ${var2}`,
-    `${function4} ${var2}`,
-    `${var2} if ${function4}(${var2})`,
+    `${function4}(${var2})`,
+    `${function4}(${var2})`,
+    `${function4}(${var2})`,
+    `${var2} ${unless} ${function4}(${var2})`,
   ];
+
+  const functionDecleration = oneOf([
+    `def ${function1}(${arg1}, ${maybeSpreadArgument(arg2)})`,
+    `def ${function1}(:${arg1}, :${arg2})`,
+  ])
 
   return (
     [
-      `def ${function1} (${arg1}, ${oneOf(["", "*", "**"])}${arg2})`,
-      expression(var2, function2, var1, arg2),
-      `${var1} = ${function3} ${arg1}`,
+      functionDecleration,
+      expression(var1, function2, arg1, cleanedArgumentName(arg2), verbNoun1),
+      expression(var2, function3, var1, cleanedArgumentName(arg2), verbNoun2),
       ``,
       oneOf(returns),
       `end`,
@@ -58,19 +82,19 @@ export const buildBasicFunction2 = () => {
     var1,
     var2,
     var3,
-  } = ingredients(functionName, variableName, variableName, variableName);
+  } = ingredients(functionName, argumentName, variableName, variableName);
 
   const returns = [
-    `return ${function4} ${var2}, ${var3}`,
-    `return ${function4} ${var2} || ${var3}`,
-    `return ${var2} if ${function4}`,
+    `${function4}(${var2}, ${var3})`,
+    `${function4}(${var2} || ${var3})`,
+    `${var2} if ${function4}`,
   ];
 
   return (
     [
-      `def ${function1} (${arg1}, ${arg2})`,
-      `${var1} = ${function2} ${arg1}`,
-      `${var2}, ${var3} = ${function3} ${var1}, ${arg2}`,
+      `def ${function1}(${arg1}, ${arg2})`,
+      `${var1} = self.${function2}(${arg1})`,
+      `${var2} = ${function3}(${var1}, ${var3}[:${arg2}])`,
       ``,
       oneOf(returns),
       `end`,

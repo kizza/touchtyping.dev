@@ -23,8 +23,8 @@ export const ingredients: Ingredients = (
   formatVariable,
   formatType
 ) => {
-  const { next: noun } = uniqueWords(uniqueNoun, 12);
-  const { next: verbNoun } = uniqueWords(uniqueVerbNoun, 5);
+  const {next: noun} = uniqueWords(uniqueNoun, 12);
+  const {next: verbNoun} = uniqueWords(uniqueVerbNoun, 7);
 
   return {
     function1: formatFunction(verbNoun()),
@@ -40,6 +40,8 @@ export const ingredients: Ingredients = (
     var1: formatVariable(noun()),
     var2: formatVariable(noun()),
     var3: formatVariable(noun()),
+    verbNoun1: verbNoun(),
+    verbNoun2: verbNoun()
   };
 };
 
@@ -80,6 +82,9 @@ const shuffle = <T>(array: T[]) => {
   }
   return shuffled;
 };
+
+export const snakize = (input: string) =>
+  input.replace(/ /g, "_").toLowerCase()
 
 export const camelize = (input: string) =>
   input
